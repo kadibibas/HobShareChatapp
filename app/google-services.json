@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "605961627283",
+    "firebase_url": "https://hobsharechatapp.firebaseio.com",
+    "project_id": "hobsharechatapp",
+    "storage_bucket": "hobsharechatapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:605961627283:android:de8cb9a159450ee7",
+        "android_client_info": {
+          "package_name": "com.example.kadib.hobsharechatapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "605961627283-bb0fdodum8cp21jfpq9jo6r1m88ru16g.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.kadib.hobsharechatapp",
+            "certificate_hash": "a7a827811dffa606b4362bb571d53f97bc158dc8"
+          }
+        },
+        {
+          "client_id": "605961627283-4i4dsdeiqg55jmsul8u23uevl4estngu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDOAvom2lAOKjbbE_bDJ8UZFWO4o559wVc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "605961627283-4i4dsdeiqg55jmsul8u23uevl4estngu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.kadib.hobsharechatapp.StartActivity"
+    android:background="@color/colorPrimary">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Welcome to Hob Share chat"
+        android:textColor="@android:color/white"
+        android:textSize="24sp"
+        android:layout_above="@+id/start_login_btn"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="46dp" />
+
+    <Button
+        android:id="@+id/start_reg_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@android:color/white"
+        android:text="need a new account?"
+        android:textColor="@color/colorPrimary"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="94dp" />
+
+    <Button
+        android:id="@+id/start_login_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:backgroundTint="@color/colorAccent"
+        android:text="ALREADY HAVE ACCOUNT?"
+        android:textColor="@android:color/white"
+        android:layout_above="@+id/start_reg_btn"
+        android:layout_centerHorizontal="true" />
+</RelativeLayout>
