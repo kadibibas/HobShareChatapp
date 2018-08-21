@@ -34,7 +34,8 @@ import android.Manifest;
         import android.widget.ImageButton;
         import android.widget.ImageView;
         import android.widget.Switch;
-        import android.widget.Toast;
+import android.widget.TextView;
+import android.widget.Toast;
 
         import com.android.volley.Request;
         import com.android.volley.RequestQueue;
@@ -58,7 +59,8 @@ import android.Manifest;
         import com.google.firebase.database.FirebaseDatabase;
         import com.google.firebase.database.Query;
         import com.google.firebase.database.ValueEventListener;
-        import com.mapbox.mapboxsdk.Mapbox;
+import com.google.firebase.storage.FirebaseStorage;
+import com.mapbox.mapboxsdk.Mapbox;
         import com.mapbox.mapboxsdk.annotations.Icon;
         import com.mapbox.mapboxsdk.annotations.IconFactory;
         import com.mapbox.mapboxsdk.annotations.Marker;
@@ -81,8 +83,11 @@ import android.Manifest;
         import com.mapbox.mapboxsdk.style.layers.Property;
         import com.mapbox.mapboxsdk.style.layers.PropertyFactory;
         import com.mapbox.mapboxsdk.style.sources.VectorSource;
+import com.squareup.picasso.Callback;
+import com.squareup.picasso.NetworkPolicy;
+import com.squareup.picasso.Picasso;
 
-        import org.json.JSONArray;
+import org.json.JSONArray;
         import org.json.JSONException;
         import org.json.JSONObject;
 
@@ -134,6 +139,7 @@ public class activity_main_map extends AppCompatActivity implements android.loca
     private DatabaseReference mFriendDatabase;
     private DatabaseReference mNotificationDatabase;
     private FirebaseUser mCurrent_user;
+
 
 
 
@@ -573,6 +579,8 @@ public class activity_main_map extends AppCompatActivity implements android.loca
                         user = new MapUser();
                         user.Device_token = jsonobject.getString("Device_token");
                         user.Visibility = jsonobject.getString("Visibility");
+                        user.Name = jsonobject.getString("name");
+                        user.Status = jsonobject.getString("status");
                         user.Lat = jsonobject.getString("Lat");
                         user.Lng = jsonobject.getString("Lng");
                         users.put(jsonobject.getString("Id"),user);
@@ -650,13 +658,16 @@ public class activity_main_map extends AppCompatActivity implements android.loca
                 MapUser user = entry.getValue();
                 String Slat = user.Lat;
                 String Slng = user.Lng;
-
+                String name = user.Name;
+                String status = user.Status;
                 double lat = Double.parseDouble(Slat);
                 double lng = Double.parseDouble(Slng);
                 LatLng latlng = new LatLng(lat,lng);
 
                 Marker marker = mapbox.addMarker(new MarkerOptions()
                         .position(latlng)
+                        .title(name)
+                        .snippet(status)
                 );
                 Markers.put(entry.getKey(), marker);
                 mapbox.animateCamera(CameraUpdateFactory.newCameraPosition(new CameraPosition.Builder()
@@ -841,9 +852,5 @@ public class activity_main_map extends AppCompatActivity implements android.loca
         polygons.add(polygons.get(0));
         return polygons;
     }
-
-
-
-
 }
 

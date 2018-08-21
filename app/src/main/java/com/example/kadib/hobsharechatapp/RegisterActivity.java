@@ -120,7 +120,7 @@ public class RegisterActivity extends AppCompatActivity {
 
                                 try {
                                     String fId = mAuth.getInstance().getCurrentUser().getUid();
-                                    sendPostRequest(deviceToken, fId,"false","0.0","0.0");
+                                    sendPostRequest(deviceToken, fId,"false","0.0","0.0", display_name, "Hi there I'm using HOB SHARE Chat App.");
 
                                 }
                                 catch (Exception e)
@@ -158,9 +158,9 @@ public class RegisterActivity extends AppCompatActivity {
 
     }
 
-    public void sendPostRequest(final String token, final String fid, final String vis, final String lat, final String lng)
+    public void sendPostRequest(final String token, final String fid, final String vis, final String lat, final String lng, final String name, final String status)
     {
-        String url = "http://mapapp.cyberserve.co.il/API/User/saveUser?token=" + token + "&fid=" + fid + "&vis=" + vis + "&lat=" + lat + "&lng=" + lng;
+        String url = "http://mapapp.cyberserve.co.il/API/User/saveUser?token=" + token + "&fid=" + fid + "&vis=" + vis + "&lat=" + lat + "&lng=" + lng + "&name=" + name + "&status=" + status;
         mRequestQueue = Volley.newRequestQueue(this);
         stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
