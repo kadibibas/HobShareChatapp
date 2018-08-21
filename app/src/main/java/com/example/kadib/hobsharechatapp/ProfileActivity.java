@@ -4,12 +4,19 @@ import android.app.ProgressDialog;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -34,6 +41,14 @@ public class ProfileActivity extends AppCompatActivity {
     private Button mProfileSendReqBtn;
     private Button mDeclineBtn;
     private DatabaseReference mRootRef;
+
+    //Http request
+    private RequestQueue mRequestQueue;
+    private StringRequest stringRequest;
+
+    private String TAG = StartActivity.class.getName();
+    private FirebaseAuth mAuth;
+    private DatabaseReference mDatabase;
 
     private String mCurrent_state;
 
@@ -277,6 +292,8 @@ public class ProfileActivity extends AppCompatActivity {
 
 
                             if(databaseError == null){
+                                /*<--------------------------------- new friendship write to db -------------------------------->*/
+                                sendPostRequest(mCurrent_user.getUid(),user_id);
 
                                 mProfileSendReqBtn.setEnabled(true);
                                 mCurrent_state = "friends";
@@ -313,6 +330,8 @@ public class ProfileActivity extends AppCompatActivity {
 
 
                             if(databaseError == null){
+                                /*-------------- delete friendship from db ------------*/
+                                deleteFriendship(mCurrent_user.getUid(),user_id);
 
                                 mCurrent_state = "not_friends";
                                 mProfileSendReqBtn.setText("Send Friend Request");
@@ -337,5 +356,51 @@ public class ProfileActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    public void sendPostRequest(final String userId, final String fid )
+    {
+        String url = "http://mapapp.cyberserve.co.il/API/User/saveFriendship?id=" + userId + "&fid=" + fid;
+        mRequestQueue = Volley.newRequestQueue(this);
+        stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+                Log.i(TAG,"Response: "+response.toString());
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                Log.i(TAG,"Error: "+error.toString());
+
+            }
+        });
+        mRequestQueue.add(stringRequest);
+
+    }
+
+
+    public void deleteFriendship(final String userId, final String fid)
+    {
+
+        String url = "http://mapapp.cyberserve.co.il/API/User/DelFriendship?id=" + userId + "&fid=" + fid;
+        mRequestQueue = Volley.newRequestQueue(this);
+        stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+                Log.i(TAG,"Response: "+response.toString());
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                Log.i(TAG,"Error: "+error.toString());
+
+            }
+        });
+        mRequestQueue.add(stringRequest);
+
     }
 }

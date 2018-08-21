@@ -17,7 +17,7 @@ public class Users {
 
     }
 
-    public Users(String name, String image, String status, String thumb_image) {
+    public Users(String name, String image, String status, String thumb_image,String Device_token,String Visibility,String Lat,String Lng) {
         this.name = name;
         this.image = image;
         this.status = status;
@@ -55,5 +55,7 @@ public class Users {
     public void setThumb_image(String thumb_image) {
         this.thumb_image = thumb_image;
     }
+
+
 
 }

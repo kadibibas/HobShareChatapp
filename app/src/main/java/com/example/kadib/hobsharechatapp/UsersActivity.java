@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -37,6 +38,8 @@ public class UsersActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_users);
 
+        Log.d("<--------type------>","1");
+
         mToolbar = (Toolbar) findViewById(R.id.users_appBar);
         setSupportActionBar(mToolbar);
 
@@ -45,11 +48,15 @@ public class UsersActivity extends AppCompatActivity {
 
         mUsersDatabase = FirebaseDatabase.getInstance().getReference().child("Users");
 
+        Log.d("<--------type------>","2");
+
         mLayoutManager = new LinearLayoutManager(this);
 
         mUsersList = (RecyclerView) findViewById(R.id.users_list);
         mUsersList.setHasFixedSize(true);
         mUsersList.setLayoutManager(mLayoutManager);
+
+        Log.d("<--------type------>","3");
 
 
     }
@@ -57,13 +64,14 @@ public class UsersActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-
+        Log.d("<--------type------>","4");
         FirebaseRecyclerAdapter<Users, UsersViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Users, UsersViewHolder>(
 
                 Users.class,
                 R.layout.users_single_layout,
                 UsersViewHolder.class,
                 mUsersDatabase
+
 
         ) {
             @Override
@@ -72,6 +80,7 @@ public class UsersActivity extends AppCompatActivity {
                 usersViewHolder.setDisplayName(users.getName());
                 usersViewHolder.setUserStatus(users.getStatus());
                 usersViewHolder.setUserImage(users.getThumb_image(), getApplicationContext());
+                Log.d("<--------type------>","5");
 
                 final String user_id  = getRef(position).getKey();
 
@@ -91,6 +100,7 @@ public class UsersActivity extends AppCompatActivity {
 
 
         mUsersList.setAdapter(firebaseRecyclerAdapter);
+        Log.d("<--------type------>","7");
 
     }
 
@@ -101,8 +111,9 @@ public class UsersActivity extends AppCompatActivity {
 
         public UsersViewHolder(View itemView) {
             super(itemView);
-
+            Log.d("<--------type------>","8");
             mView = itemView;
+
 
         }
 
@@ -110,6 +121,7 @@ public class UsersActivity extends AppCompatActivity {
 
             TextView userNameView = (TextView) mView.findViewById(R.id.user_single_name);
             userNameView.setText(name);
+            Log.d("<--------type------>","9");
 
         }
 
@@ -117,6 +129,7 @@ public class UsersActivity extends AppCompatActivity {
 
             TextView userStatusView = (TextView) mView.findViewById(R.id.user_single_status);
             userStatusView.setText(status);
+            Log.d("<--------type------>","10");
 
 
         }
@@ -126,6 +139,7 @@ public class UsersActivity extends AppCompatActivity {
             CircleImageView userImageView = (CircleImageView) mView.findViewById(R.id.user_single_image);
 
             Picasso.with(ctx).load(thumb_image).placeholder(R.drawable.default_avatar).into(userImageView);
+            Log.d("<--------type------>","11");
 
         }
 
